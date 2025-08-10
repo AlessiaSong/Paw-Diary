@@ -23,3 +23,206 @@
     font-size: 28px;
     font-weight: bold;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Pacifico&display=swap');
+
+.app-bg {
+  min-height: 100vh;
+  background: linear-gradient(rgba(252, 239, 215, 0.3), rgba(252, 239, 215, 0.4)), url('https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  font-family: 'Pacifico', cursive, 'Quicksand', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-section {
+  text-align: center;
+  padding: 0 1rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+}
+
+.welcome-title {
+  font-family: 'Pacifico', cursive, 'Quicksand', sans-serif;
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin: 0 0 2.5rem 0;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 24px rgba(80,60,30,0.18);
+}
+
+.welcome-subtitle {
+  font-family: 'Pacifico', cursive, 'Quicksand', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin: 0 0 3.5rem 0;
+  color: #fff;
+  opacity: 0.98;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(80,60,30,0.12);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 600px;
+  padding: 0 2rem;
+}
+
+.auth-button {
+  font-family: 'Pacifico', cursive, 'Quicksand', sans-serif;
+  font-size: 2rem;
+  padding: 1.2rem 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  min-width: 320px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #D4A574, #B8860B);
+  color: white;
+}
+
+.auth-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.auth-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #CD853F, #A0522D);
+}
+
+.auth-button:hover::before {
+  left: 100%;
+}
+
+.auth-button:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.signup-button {
+  background: linear-gradient(135deg, #D4A574, #B8860B);
+  color: white;
+}
+
+.signup-button:hover {
+  background: linear-gradient(135deg, #CD853F, #A0522D);
+}
+
+.login-button {
+  background: linear-gradient(135deg, #D4A574, #B8860B);
+  color: white;
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #CD853F, #A0522D);
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #FCEFD7;
+  margin: 10% auto;
+  padding: 30px;
+  border: none;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.close {
+  color: #8D6E63;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #5D4037;
+}
+
+/* 表单样式优化 */
+form {
+  margin-top: 1rem;
+}
+
+form div {
+  margin-bottom: 1.5rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #5D4037;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background: white;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #88C9BF;
+  box-shadow: 0 0 0 3px rgba(136, 201, 191, 0.1);
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #88C9BF, #6BB6A9);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #7AB8AE, #5AA599);
+  transform: translateY(-1px);
+}
