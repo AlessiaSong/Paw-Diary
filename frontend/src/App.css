@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Pacifico&display=swap');
+
 .modal {
     position: fixed;
     z-index: 1;
@@ -23,8 +25,6 @@
     font-size: 28px;
     font-weight: bold;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Pacifico&display=swap');
 
 .app-bg {
   min-height: 100vh;

@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-const ContactForm = ({ existingContact = {}, updateCallback }) => {
-    const [firstName, setFirstName] = useState(existingContact.firstName || "");
-    const [lastName, setLastName] = useState(existingContact.lastName || "");
-    const [email, setEmail] = useState(existingContact.email || "");
-    const [password, setPassword] = useState(existingContact.password || "");
+const UserForm = ({ existingUser = {}, updateCallback }) => {
+    const [firstName, setFirstName] = useState(existingUser.firstName || "");
+    const [lastName, setLastName] = useState(existingUser.lastName || "");
+    const [email, setEmail] = useState(existingUser.email || "");
+    const [password, setPassword] = useState(existingUser.password || "");
 
-    const updating = Object.entries(existingContact).length !== 0
+    const updating = Object.entries(existingUser).length !== 0
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -17,8 +17,8 @@ const ContactForm = ({ existingContact = {}, updateCallback }) => {
             email,
             password
         }
-        // const url = "http://18.140.54.37:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact")
-        const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact");
+        // const url = "http://18.140.54.37:5000/" + (updating ? `update_user/${existingUser.id}` : "create_user")
+        const url = "http://127.0.0.1:5000/users/" + (updating ? `${existingUser.id}` : "create");
         const options = {
             method: updating ? "PATCH" : "POST",
             headers: {
@@ -78,4 +78,4 @@ const ContactForm = ({ existingContact = {}, updateCallback }) => {
     );
 };
 
-export default ContactForm
+export default UserForm

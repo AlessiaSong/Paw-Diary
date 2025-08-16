@@ -1,7 +1,8 @@
 from config import db
+from datetime import datetime
 
 
-class Contact(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
@@ -26,7 +27,7 @@ class Pet(db.Model):
     species = db.Column(db.String(100))   # 动物种类例如猫、狗
     breed = db.Column(db.String(100))     # 品种
     birth_date = db.Column(db.Date)
-    user_id = db.Column(db.Integer, db.ForeignKey('contact.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     diet_logs = db.relationship('DietLog', backref='pet', lazy=True)
     weight_logs = db.relationship('WeightLog', backref='pet', lazy=True)
     vaccine_logs = db.relationship('VaccineLog', backref='pet', lazy=True)  # 疫苗接种记录  

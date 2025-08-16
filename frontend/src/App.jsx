@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
-import ContactList from "./ContactList";
+import UserList from "./UserList";
 import "./App.css";
-import ContactForm from "./ContactForm";
-import ContactLogin from "./ContactLogin"
+import UserForm from "./UserForm";
+import UserLogin from "./UserLogin"
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentContact, setCurrentContact] = useState({})
+  const [currentUser, setCurrentUser] = useState({})
   const [modalMode, setModalMode] = useState("")
   const [loggedInUser, setLoggedInUser] = useState(null);
 
 
   useEffect(() => {
-    fetchContacts()
+    fetchUsers()
   }, []);
 
-  const fetchContacts = async () => {
+  const fetchUsers = async () => {
     // const response = await fetch("http://18.140.54.37:5000/api");
-    const response = await fetch("http://127.0.0.1:5000/api/");
+    const response = await fetch("http://127.0.0.1:5000/users/");
     const data = await response.json();
-    setContacts(data.contacts);
+    setUsers(data.users);
   };
 
   const closeModal = () => {
     setIsModalOpen(false)
-    setCurrentContact({})
+    setCurrentUser({})
     setModalMode("")
   }
 
@@ -39,16 +39,16 @@ function App() {
     if (!isModalOpen) setIsModalOpen(true)
   }
 
-  const openEditModal = (contact) => {
+  const openEditModal = (user) => {
     if (isModalOpen) return
-    setCurrentContact(contact)
+    setCurrentUser(user)
     setModalMode("edit")
     setIsModalOpen(true)
   }
 
   const onUpdate = () => {
     closeModal()
-    fetchContacts()
+    fetchUsers()
   }
 
   return (
@@ -76,10 +76,10 @@ function App() {
           <div className="modal-content">
             <span className="close" onClick={closeModal}>&times;</span>
             {modalMode === "create" && (
-              <ContactForm existingContact={{}} updateCallback={onUpdate} />
+              <UserForm existingUser={{}} updateCallback={onUpdate} />
             )}
             {modalMode === "login" && (
-               <ContactLogin
+               <UserLogin
                setLoggedInUser={setLoggedInUser}
                updateCallback={onUpdate}
              />
