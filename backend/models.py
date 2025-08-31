@@ -10,16 +10,17 @@ class User(db.Model):
     password = db.Column(db.String(120),unique=False,nullable=False)
     pets = db.relationship('Pet', backref='owner', lazy=True)
     #是否创建一个以email为key的password字典
-
+    
     def to_json(self):
         return {
             "id": self.id,
             "firstName": self.first_name,
             "lastName": self.last_name,
             "email": self.email,
-            "password":self.password,
-            "pets":self.pets
+            "password": self.password,
+            "pets": [pet.to_json() for pet in self.pets]  # 改这里
         }
+
 
 class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +40,8 @@ class Pet(db.Model):
             "name": self.name,
             "species": self.species,
             "breed": self.breed,
+            "birth_date": self.birth_date.strftime("%Y-%m-%d") if self.birth_date else None,
+            "user_id": self.user_id
         }
 
 class DietLog(db.Model):
@@ -46,13 +49,21 @@ class DietLog(db.Model):
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
     description = db.Column(db.Text)
+    meal_type = db.Column(db.String(50))      # 早餐/午餐/晚餐/零食
+    food_amount = db.Column(db.Float)         # 食物量
+    unit = db.Column(db.String(20))           # 单位(克/杯等)
+    feeding_time = db.Column(db.Time)         # 喂食时间
 
     def to_json(self):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
-            "date": self.date,
-            "description": self.description
+            "date": self.date.strftime("%Y-%m-%d") if self.date else None,
+            "description": self.description,
+            "meal_type": self.meal_type,
+            "food_amount": self.food_amount,
+            "unit": self.unit,
+            "feeding_time": self.feeding_time.strftime("%H:%M") if self.feeding_time else None
         }
 
 class WeightLog(db.Model):
@@ -65,7 +76,7 @@ class WeightLog(db.Model):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
-            "date": self.date,
+            "date": self.date.strftime("%Y-%m-%d") if self.date else None,
             "weight_kg": self.weight_kg
         }
 
@@ -75,14 +86,18 @@ class VaccineLog(db.Model):
     date = db.Column(db.Date, nullable=False)
     vaccine_type = db.Column(db.String(100))
     notes = db.Column(db.Text)
+    next_due_date = db.Column(db.Date)        # 下次接种日期
+    reminder_enabled = db.Column(db.Boolean, default=True)  # 是否启用提醒
 
     def to_json(self):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
-            "date": self.date,
+            "date": self.date.strftime("%Y-%m-%d") if self.date else None,
             "vaccine_type": self.vaccine_type,
-            "notes": self.notes
+            "notes": self.notes,
+            "next_due_date": self.next_due_date.strftime("%Y-%m-%d") if self.next_due_date else None,
+            "reminder_enabled": self.reminder_enabled
         }
 
 class PetGrowthLog(db.Model):
@@ -99,9 +114,29 @@ class PetGrowthLog(db.Model):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
-            "date": self.date,
+            "date": self.date.strftime("%Y-%m-%d %H:%M:%S") if self.date else None,
             "image_url": self.image_url,
-            "description": self.description
+            "description": self.description,
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S") if self.created_at else None
+        }
+
+# 需要添加的通知模型
+class Reminder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
+    reminder_type = db.Column(db.String(50))  # vaccine, weight, diet
+    due_date = db.Column(db.Date)
+    message = db.Column(db.Text)
+    is_sent = db.Column(db.Boolean, default=False)
+    
+    def to_json(self):
+        return {
+            "id": self.id,
+            "pet_id": self.pet_id,
+            "reminder_type": self.reminder_type,
+            "due_date": self.due_date.strftime("%Y-%m-%d") if self.due_date else None,
+            "message": self.message,
+            "is_sent": self.is_sent
         }
 
 

@@ -13,14 +13,14 @@ def get_users():
     return jsonify({"users": json_users})
 
 
-@users_bp.route("/create", methods=["POST"])
-def create_user():
-    """创建新用户"""
-    first_name = request.json.get("firstName")
-    last_name = request.json.get("lastName")
-    email = request.json.get("email")
-    password = request.json.get("password")
-    print("Request JSON:", request.json)
+@users_bp.route("/register", methods=["POST"])
+def register_user():
+    """用户注册"""
+    data = request.get_json()
+    first_name = data.get("firstName")
+    last_name = data.get("lastName")
+    email = data.get("email")
+    password = data.get("password")
 
     if not first_name or not last_name or not email or not password:
         return (
@@ -28,14 +28,24 @@ def create_user():
             400,
         )
 
+    # 检查邮箱是否已存在
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({"message": "Email already exists"}), 409
+
     new_user = User(first_name=first_name, last_name=last_name, email=email, password=password)
     try:
         db.session.add(new_user)
         db.session.commit()
+        return jsonify(new_user.to_json()), 201
     except Exception as e:
+        db.session.rollback()
         return jsonify({"message": str(e)}), 400
 
-    return jsonify({"message": "User created!"}), 201
+@users_bp.route("/create", methods=["POST"])
+def create_user():
+    """创建新用户 (保持向后兼容)"""
+    return register_user()
 
 
 @users_bp.route("/<int:user_id>", methods=["PATCH"])

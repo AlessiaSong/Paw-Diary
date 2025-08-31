@@ -1,3 +1,5 @@
 Flask
 Flask-SQLAlchemy
 flask-cors
+python-dateutil
+requests
