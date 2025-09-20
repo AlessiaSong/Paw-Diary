@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, PawPrint, Weight, Calendar, UtensilsCrossed } from "lucide-react";
+import { Plus, PawPrint, Weight, Calendar, UtensilsCrossed, ShoppingBag, Utensils, Clock } from "lucide-react";
 import PetForm from "./PetForm";
 import PetProfile from "./PetProfile";
 import { API_BASE_URL } from "./config";
@@ -54,7 +54,7 @@ function Dashboard({ user }) {
             className="add-pet-btn"
             onClick={() => setShowPetForm(true)}
           >
-            <Plus size={20} />
+            <Plus size={16} />
             Add Pet
           </button>
         </div>
@@ -62,7 +62,7 @@ function Dashboard({ user }) {
         <div className="pet-list">
           {pets.length === 0 ? (
             <div className="no-pets">
-              <PawPrint size={48} />
+              <PawPrint size={64} color="#DDDDDD" />
               <p>No pets yet, click the button above to add one</p>
             </div>
           ) : (
@@ -73,11 +73,11 @@ function Dashboard({ user }) {
                 onClick={() => handlePetSelect(pet)}
               >
                 <div className="pet-avatar">
-                  <PawPrint size={24} />
+                  <PawPrint size={24} color="#AEC6CF" />
                 </div>
                 <div className="pet-info">
                   <h3>{pet.name}</h3>
-                  <p>{pet.breed}</p>
+                  <p>{pet.breed || 'Unknown Breed'}</p>
                 </div>
               </div>
             ))
@@ -96,15 +96,15 @@ function Dashboard({ user }) {
               <p>Select a pet from the left to view details</p>
               <div className="feature-icons">
                 <div className="feature-icon">
-                  <Weight size={32} />
+                  <ShoppingBag size={36} color="#AEC6CF" />
                   <span>Weight Management</span>
                 </div>
                 <div className="feature-icon">
-                  <UtensilsCrossed size={32} />
+                  <Utensils size={36} color="#98D7C2" />
                   <span>Diet Records</span>
                 </div>
                 <div className="feature-icon">
-                  <Calendar size={32} />
+                  <Clock size={36} color="#FFD3B5" />
                   <span>Vaccine Reminders</span>
                 </div>
               </div>
@@ -130,4 +130,4 @@ function Dashboard({ user }) {
   );
 }
 
-export default Dashboard; 
+export default Dashboard;

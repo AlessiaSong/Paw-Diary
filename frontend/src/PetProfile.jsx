@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Weight, UtensilsCrossed, Calendar, PawPrint, Edit, Plus } from "lucide-react";
+import { Weight, UtensilsCrossed, Calendar, PawPrint, Plus } from "lucide-react";
 import { API_BASE_URL } from "./config";
 import WeightLogForm from "./WeightLogForm";
 import DietLogForm from "./DietLogForm";
@@ -97,23 +97,22 @@ function PetProfile({ pet }) {
 
   return (
     <div className="pet-profile">
-      {/* Pet basic info header */}
+      {/* Pet Header */}
       <div className="pet-header">
         <div className="pet-avatar">
-          <PawPrint size={48} />
+          <PawPrint size={40} color="#AEC6CF" />
         </div>
         <div className="pet-info">
           <h1>{pet.name}</h1>
           <p className="pet-breed">{pet.breed || "Unknown Breed"}</p>
           <div className="pet-details">
-            <span>{getSpeciesText(pet.species)} • {getGenderText(pet.gender)}</span>
-            {pet.birth_date && <span>• Born: {formatDate(pet.birth_date)}</span>}
-            {pet.weight && <span>• Weight: {pet.weight}kg</span>}
+            {getSpeciesText(pet.species)} • {getGenderText(pet.gender)}
+            {pet.birth_date && ` • Born: ${formatDate(pet.birth_date)}`}
           </div>
         </div>
       </div>
 
-      {/* Tab navigation */}
+      {/* Tab Navigation */}
       <div className="tab-navigation">
         <button
           className={`tab-button ${activeTab === "overview" ? "active" : ""}`}
@@ -144,12 +143,12 @@ function PetProfile({ pet }) {
         </button>
       </div>
 
-      {/* Content area */}
+      {/* Content Area */}
       <div className="tab-content">
         {activeTab === "overview" && (
           <div className="overview-tab">
             <div className="overview-grid">
-              {/* Basic info card */}
+              {/* Basic Information Card */}
               <div className="info-card">
                 <h3>Basic Information</h3>
                 <div className="info-list">
@@ -165,16 +164,10 @@ function PetProfile({ pet }) {
                     <span className="label">Microchip ID:</span>
                     <span>{pet.microchip_id || "None"}</span>
                   </div>
-                  {pet.notes && (
-                    <div className="info-item">
-                      <span className="label">Notes:</span>
-                      <span>{pet.notes}</span>
-                    </div>
-                  )}
                 </div>
               </div>
 
-              {/* Weight info card */}
+              {/* Weight Information Card */}
               <div className="info-card">
                 <h3>Weight Information</h3>
                 {getLatestWeight() ? (
@@ -187,7 +180,7 @@ function PetProfile({ pet }) {
                       className="add-btn"
                       onClick={() => setShowWeightForm(true)}
                     >
-                      <Plus size={16} />
+                      <Plus size={14} />
                       Record Weight
                     </button>
                   </div>
@@ -198,14 +191,14 @@ function PetProfile({ pet }) {
                       className="add-btn"
                       onClick={() => setShowWeightForm(true)}
                     >
-                      <Plus size={16} />
+                      <Plus size={14} />
                       Record Weight
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* Vaccine reminders card */}
+              {/* Vaccine Reminders Card */}
               <div className="info-card">
                 <h3>Vaccine Reminders</h3>
                 {getUpcomingVaccines().length > 0 ? (
@@ -226,13 +219,13 @@ function PetProfile({ pet }) {
                   className="add-btn"
                   onClick={() => setShowVaccineForm(true)}
                 >
-                  <Plus size={16} />
+                  <Plus size={14} />
                   Record Vaccine
                 </button>
               </div>
 
-              {/* Recent diet records card */}
-              <div className="info-card">
+              {/* Recent Diet Card - Full Width */}
+              <div className="info-card" style={{ gridColumn: '1 / -1' }}>
                 <h3>Recent Diet</h3>
                 {dietLogs.length > 0 ? (
                   <div className="recent-diet">
@@ -252,7 +245,7 @@ function PetProfile({ pet }) {
                   className="add-btn"
                   onClick={() => setShowDietForm(true)}
                 >
-                  <Plus size={16} />
+                  <Plus size={14} />
                   Record Diet
                 </button>
               </div>
@@ -268,7 +261,7 @@ function PetProfile({ pet }) {
                 className="add-btn"
                 onClick={() => setShowWeightForm(true)}
               >
-                <Plus size={16} />
+                <Plus size={14} />
                 Record Weight
               </button>
             </div>
@@ -296,7 +289,7 @@ function PetProfile({ pet }) {
                 className="add-btn"
                 onClick={() => setShowDietForm(true)}
               >
-                <Plus size={16} />
+                <Plus size={14} />
                 Record Diet
               </button>
             </div>
@@ -327,7 +320,7 @@ function PetProfile({ pet }) {
                 className="add-btn"
                 onClick={() => setShowVaccineForm(true)}
               >
-                <Plus size={16} />
+                <Plus size={14} />
                 Record Vaccine
               </button>
             </div>
@@ -398,4 +391,4 @@ function PetProfile({ pet }) {
   );
 }
 
-export default PetProfile; 
+export default PetProfile;

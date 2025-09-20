@@ -1,203 +1,224 @@
+/* Pet Profile Styles */
 .pet-profile {
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 24px;
+  background-color: #FFFFFF;
 }
 
-/* 宠物头部信息 */
+/* Pet Header */
 .pet-header {
+  height: 80px;
+  background-color: #FFE6E8;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  gap: 16px;
+  padding: 0 24px;
+  margin-bottom: 24px;
 }
 
 .pet-avatar {
-  width: 80px;
-  height: 80px;
-  background-color: #3498db;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: #AEC6CF;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
 }
 
 .pet-info h1 {
-  margin: 0 0 8px 0;
-  color: #2c3e50;
-  font-size: 2rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #333333;
+  margin: 0;
 }
 
 .pet-breed {
-  margin: 0 0 12px 0;
-  color: #6c757d;
-  font-size: 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
 }
 
 .pet-details {
-  display: flex;
-  gap: 15px;
-  color: #6c757d;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
+  color: #666666;
+  margin: 0;
 }
 
-/* 标签页导航 */
+/* Tab Navigation */
 .tab-navigation {
-  display: flex;
-  background-color: white;
-  border-radius: 8px;
+  height: 48px;
+  background-color: #FAFAFA;
+  border-radius: 12px;
   padding: 4px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 4px;
 }
 
 .tab-button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: none;
-  background: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #6c757d;
-  transition: all 0.2s;
-  flex: 1;
   justify-content: center;
+  gap: 8px;
 }
 
 .tab-button:hover {
-  background-color: #f8f9fa;
-  color: #3498db;
+  transform: scale(1.02);
 }
 
 .tab-button.active {
-  background-color: #3498db;
-  color: white;
+  background-color: #FFFFFF;
+  color: #FF8C94;
+  font-weight: 600;
 }
 
-/* 内容区域 */
+.tab-button:not(.active) {
+  color: #999999;
+  font-weight: 400;
+}
+
+/* Content Area */
 .tab-content {
   flex: 1;
   overflow-y: auto;
 }
 
-/* 概览标签页 */
+/* Overview Tab */
 .overview-tab {
-  padding: 20px 0;
+  padding: 0;
 }
 
 .overview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 24px;
 }
 
 .info-card {
-  background-color: white;
-  border-radius: 12px;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
-  margin: 0 0 15px 0;
-  color: #2c3e50;
-  font-size: 1.2rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #333333;
+  margin: 0 0 16px 0;
 }
 
 .info-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .info-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #f1f3f4;
-}
-
-.info-item:last-child {
-  border-bottom: none;
 }
 
 .info-item .label {
-  font-weight: 500;
-  color: #6c757d;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #666666;
 }
 
 .info-item span:last-child {
-  color: #2c3e50;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #333333;
 }
 
-/* 体重信息 */
+/* Weight Information */
 .weight-info {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 24px;
 }
 
 .current-weight {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .weight-value {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #3498db;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #FF8C94;
 }
 
 .weight-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
 }
 
-/* 疫苗提醒 */
+/* Vaccine Reminders */
 .vaccine-reminders {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .vaccine-reminder {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #fff3cd;
-  border-radius: 6px;
-  border-left: 4px solid #ffc107;
+  padding: 12px;
+  background-color: #FFF3CD;
+  border-radius: 8px;
+  border-left: 4px solid #FFC107;
 }
 
 .vaccine-type {
-  font-weight: 500;
-  color: #856404;
-}
-
-.due-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
   font-size: 14px;
   color: #856404;
 }
 
-/* 最近饮食 */
+.due-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #856404;
+}
+
+/* Recent Diet */
 .recent-diet {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .diet-item {
@@ -205,7 +226,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #f1f3f4;
+  border-bottom: 1px solid #F1F3F4;
 }
 
 .diet-item:last-child {
@@ -213,46 +234,59 @@
 }
 
 .food-type {
-  font-weight: 500;
-  color: #2c3e50;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333333;
 }
 
 .diet-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
 }
 
-/* 添加按钮 */
+/* Add Button */
 .add-btn {
+  width: 136px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #98D7C2;
+  color: #FFFFFF;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
 }
 
 .add-btn:hover {
-  background-color: #218838;
+  background-color: #7CCCB5;
+  transform: scale(1.02);
 }
 
-/* 无数据状态 */
+/* No Data State */
 .no-data {
   text-align: center;
-  color: #6c757d;
-  padding: 20px;
+  color: #999999;
+  padding: 20px 0;
 }
 
 .no-data p {
-  margin: 0 0 15px 0;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #999999;
+  margin: 0 0 20px 0;
 }
 
-/* 标签页头部 */
+/* Tab Header */
 .tab-header {
   display: flex;
   justify-content: space-between;
@@ -261,27 +295,29 @@
 }
 
 .tab-header h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #333333;
   margin: 0;
-  color: #2c3e50;
-  font-size: 1.5rem;
 }
 
-/* 记录列表 */
+/* Records Lists */
 .weight-logs,
 .diet-logs,
 .vaccine-logs {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .weight-log-item,
 .diet-log-item,
 .vaccine-log-item {
-  background-color: white;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .weight-log-item {
@@ -291,20 +327,25 @@
 }
 
 .weight-value {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #3498db;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #FF8C94;
 }
 
 .weight-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
 }
 
 .weight-notes {
   margin-top: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
   font-style: italic;
 }
 
@@ -318,53 +359,80 @@
 
 .food-type,
 .vaccine-type {
-  font-weight: 500;
-  color: #2c3e50;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333333;
 }
 
 .diet-date,
 .vaccine-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
 }
 
 .diet-amount,
 .next-due {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
   margin-bottom: 8px;
 }
 
 .diet-notes,
 .vaccine-notes {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  color: #6c757d;
+  color: #666666;
   font-style: italic;
 }
 
-/* 响应式设计 */
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666666;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .pet-profile {
+    padding: 16px;
+  }
+  
   .pet-header {
     flex-direction: column;
     text-align: center;
+    height: auto;
+    padding: 20px;
   }
   
   .pet-details {
-    flex-direction: column;
-    gap: 5px;
+    text-align: center;
   }
   
   .tab-navigation {
     flex-wrap: wrap;
+    height: auto;
   }
   
   .tab-button {
-    flex: none;
-    min-width: 120px;
+    flex: 1;
+    min-width: 100px;
   }
   
   .overview-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
   
   .weight-log-item {
@@ -372,4 +440,14 @@
     align-items: flex-start;
     gap: 8px;
   }
-} 
+}
+
+@media (max-width: 480px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-card {
+    padding: 16px;
+  }
+}
