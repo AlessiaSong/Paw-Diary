@@ -28,6 +28,9 @@ class Pet(db.Model):
     species = db.Column(db.String(100))   # 动物种类例如猫、狗
     breed = db.Column(db.String(100))     # 品种
     birth_date = db.Column(db.Date)
+    color = db.Column(db.String(100))     # 毛色
+    microchip_id = db.Column(db.String(100))  # 芯片ID
+    notes = db.Column(db.Text)            # 备注
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     diet_logs = db.relationship('DietLog', backref='pet', lazy=True)
     weight_logs = db.relationship('WeightLog', backref='pet', lazy=True)
@@ -41,6 +44,9 @@ class Pet(db.Model):
             "species": self.species,
             "breed": self.breed,
             "birth_date": self.birth_date.strftime("%Y-%m-%d") if self.birth_date else None,
+            "color": self.color,
+            "microchip_id": self.microchip_id,
+            "notes": self.notes,
             "user_id": self.user_id
         }
 
@@ -48,11 +54,11 @@ class DietLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    description = db.Column(db.Text)
-    meal_type = db.Column(db.String(50))      # 早餐/午餐/晚餐/零食
-    food_amount = db.Column(db.Float)         # 食物量
-    unit = db.Column(db.String(20))           # 单位(克/杯等)
-    feeding_time = db.Column(db.Time)         # 喂食时间
+    description = db.Column(db.String(200), nullable=False)  # 食物描述
+    food_amount = db.Column(db.Float)  # 食物数量
+    unit = db.Column(db.String(20))  # 单位 (g, kg, cups, etc.)
+    meal_type = db.Column(db.String(50))  # 餐次类型 (breakfast, lunch, dinner, snack)
+    notes = db.Column(db.Text)  # 备注
 
     def to_json(self):
         return {
@@ -60,34 +66,35 @@ class DietLog(db.Model):
             "pet_id": self.pet_id,
             "date": self.date.strftime("%Y-%m-%d") if self.date else None,
             "description": self.description,
-            "meal_type": self.meal_type,
             "food_amount": self.food_amount,
             "unit": self.unit,
-            "feeding_time": self.feeding_time.strftime("%H:%M") if self.feeding_time else None
+            "meal_type": self.meal_type,
+            "notes": self.notes
         }
 
 class WeightLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    weight_kg = db.Column(db.Float)
+    weight_kg = db.Column(db.Float, nullable=False)  # 体重（公斤）
+    notes = db.Column(db.Text)  # 备注
 
     def to_json(self):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
             "date": self.date.strftime("%Y-%m-%d") if self.date else None,
-            "weight_kg": self.weight_kg
+            "weight_kg": self.weight_kg,
+            "notes": self.notes
         }
 
 class VaccineLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    vaccine_type = db.Column(db.String(100))
-    notes = db.Column(db.Text)
-    next_due_date = db.Column(db.Date)        # 下次接种日期
-    reminder_enabled = db.Column(db.Boolean, default=True)  # 是否启用提醒
+    vaccine_type = db.Column(db.String(100), nullable=False)  # 疫苗类型
+    next_due_date = db.Column(db.Date)  # 下次接种日期
+    notes = db.Column(db.Text)  # 备注
 
     def to_json(self):
         return {
@@ -95,48 +102,46 @@ class VaccineLog(db.Model):
             "pet_id": self.pet_id,
             "date": self.date.strftime("%Y-%m-%d") if self.date else None,
             "vaccine_type": self.vaccine_type,
-            "notes": self.notes,
             "next_due_date": self.next_due_date.strftime("%Y-%m-%d") if self.next_due_date else None,
-            "reminder_enabled": self.reminder_enabled
+            "notes": self.notes
         }
 
 class PetGrowthLog(db.Model):
-    __tablename__ = 'pet_growth_log'
-
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
-    image_url = db.Column(db.String(255))  # 存储图像路径
+    date = db.Column(db.Date, nullable=False)
+    height_cm = db.Column(db.Float)  # 身高（厘米）
+    length_cm = db.Column(db.Float)  # 体长（厘米）
+    notes = db.Column(db.Text)  # 备注
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "pet_id": self.pet_id,
+            "date": self.date.strftime("%Y-%m-%d") if self.date else None,
+            "height_cm": self.height_cm,
+            "length_cm": self.length_cm,
+            "notes": self.notes
+        }
+
+class Reminder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
+    due_date = db.Column(db.Date, nullable=False)
+    reminder_type = db.Column(db.String(50))  # 提醒类型 (vaccine, checkup, medication, etc.)
+    is_completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_json(self):
         return {
             "id": self.id,
             "pet_id": self.pet_id,
-            "date": self.date.strftime("%Y-%m-%d %H:%M:%S") if self.date else None,
-            "image_url": self.image_url,
+            "title": self.title,
             "description": self.description,
+            "due_date": self.due_date.strftime("%Y-%m-%d") if self.due_date else None,
+            "reminder_type": self.reminder_type,
+            "is_completed": self.is_completed,
             "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S") if self.created_at else None
         }
-
-# 需要添加的通知模型
-class Reminder(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
-    reminder_type = db.Column(db.String(50))  # vaccine, weight, diet
-    due_date = db.Column(db.Date)
-    message = db.Column(db.Text)
-    is_sent = db.Column(db.Boolean, default=False)
-    
-    def to_json(self):
-        return {
-            "id": self.id,
-            "pet_id": self.pet_id,
-            "reminder_type": self.reminder_type,
-            "due_date": self.due_date.strftime("%Y-%m-%d") if self.due_date else None,
-            "message": self.message,
-            "is_sent": self.is_sent
-        }
-
-
