@@ -1,453 +1,396 @@
-/* Pet Profile Styles */
-.pet-profile {
-  height: 100%;
+/* Pet Profile Styles - Modern Minimalist Design */
+
+.pet-profile-container {
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  background-color: #FFFFFF;
+  gap: var(--space-6);
 }
 
-/* Pet Header */
-.pet-header {
-  height: 80px;
-  background-color: #FFE6E8;
-  border-radius: 20px;
+.pet-header-card {
+  background-color: var(--background-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-  margin-bottom: 24px;
+  gap: var(--space-4);
+  position: relative;
 }
 
-.pet-avatar {
-  width: 40px;
-  height: 40px;
-  color: #AEC6CF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.pet-header-icon {
+  color: var(--primary-blue);
 }
 
-.pet-info h1 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: #333333;
-  margin: 0;
-}
-
-.pet-breed {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-  margin: 0;
-}
-
-.pet-details {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-  margin: 0;
-}
-
-/* Tab Navigation */
-.tab-navigation {
-  height: 48px;
-  background-color: #FAFAFA;
-  border-radius: 12px;
-  padding: 4px;
-  margin-bottom: 24px;
-  display: flex;
-  gap: 4px;
-}
-
-.tab-button {
-  width: 120px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  background: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.tab-button:hover {
-  transform: scale(1.02);
-}
-
-.tab-button.active {
-  background-color: #FFFFFF;
-  color: #FF8C94;
-  font-weight: 600;
-}
-
-.tab-button:not(.active) {
-  color: #999999;
-  font-weight: 400;
-}
-
-/* Content Area */
-.tab-content {
+.pet-header-info {
   flex: 1;
-  overflow-y: auto;
 }
 
-/* Overview Tab */
-.overview-tab {
-  padding: 0;
+.pet-header-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pet-header-details {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: var(--space-1) 0 0 0;
+}
+
+.edit-pet-btn {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.tabs-navigation {
+  display: flex;
+  background-color: var(--background-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-1);
+  box-shadow: var(--shadow-sm);
+  gap: var(--space-1);
+}
+
+.tab-item {
+  flex: 1;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-item:hover {
+  background-color: var(--neutral-gray-100);
+}
+
+.tab-item.active {
+  background-color: var(--primary-blue);
+  color: var(--text-inverted);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-content {
+  background-color: var(--background-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
 }
 
 .overview-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
 }
 
 .info-card {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 20px;
-}
-
-.info-card h3 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #333333;
-  margin: 0 0 16px 0;
-}
-
-.info-list {
+  background-color: var(--background-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.info-card.full-width {
+  grid-column: 1 / -1;
 }
 
-.info-item .label {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
+.card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
 }
 
-.info-item span:last-child {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #333333;
-}
-
-/* Weight Information */
-.weight-info {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.current-weight {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.weight-value {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: #FF8C94;
-}
-
-.weight-date {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-}
-
-/* Vaccine Reminders */
-.vaccine-reminders {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.vaccine-reminder {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background-color: #FFF3CD;
-  border-radius: 8px;
-  border-left: 4px solid #FFC107;
-}
-
-.vaccine-type {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: #856404;
-}
-
-.due-date {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #856404;
-}
-
-/* Recent Diet */
-.recent-diet {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.diet-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #F1F3F4;
-}
-
-.diet-item:last-child {
-  border-bottom: none;
-}
-
-.food-type {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: #333333;
-}
-
-.diet-date {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-}
-
-/* Add Button */
-.add-btn {
-  width: 136px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: #98D7C2;
-  color: #FFFFFF;
-  border: none;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.add-btn:hover {
-  background-color: #7CCCB5;
-  transform: scale(1.02);
-}
-
-/* No Data State */
-.no-data {
-  text-align: center;
-  color: #999999;
-  padding: 20px 0;
-}
-
-.no-data p {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #999999;
-  margin: 0 0 20px 0;
-}
-
-/* Tab Header */
-.tab-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.tab-header h3 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: #333333;
+.info-card p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
   margin: 0;
 }
 
-/* Records Lists */
-.weight-logs,
-.diet-logs,
-.vaccine-logs {
+.current-weight-display {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-blue);
+}
+
+.current-weight-display .weight-value {
+  font-size: var(--font-size-2xl);
+}
+
+.current-weight-display .weight-date {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+}
+
+.upcoming-vaccine-display {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.upcoming-vaccine-display .vaccine-type {
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-blue);
+}
+
+.upcoming-vaccine-display .vaccine-date {
+  font-weight: var(--font-weight-medium);
+}
+
+.no-data {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.info-card .btn {
+  margin-top: var(--space-4);
+  align-self: flex-start;
+}
+
+.recent-diet-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-2);
 }
 
-.weight-log-item,
-.diet-log-item,
-.vaccine-log-item {
-  background-color: #FFFFFF;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+.diet-log-item-overview {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--neutral-gray-100);
 }
 
-.weight-log-item {
+.diet-log-item-overview:last-child {
+  border-bottom: none;
+}
+
+.diet-log-item-overview .diet-desc {
+  font-weight: var(--font-weight-medium);
+}
+
+.diet-log-item-overview .diet-amount {
+  color: var(--text-secondary);
+}
+
+.diet-log-item-overview .diet-date {
+  color: var(--text-secondary);
+}
+
+/* Log Sections (Weight, Diet, Vaccines) */
+.log-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--space-4);
 }
 
-.weight-value {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: #FF8C94;
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.weight-date {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-}
-
-.weight-notes {
-  margin-top: 8px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-  font-style: italic;
-}
-
-.diet-info,
-.vaccine-info {
+.log-list {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.log-item {
+  display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  gap: var(--space-3);
+  background-color: var(--background-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-sm);
 }
 
-.food-type,
-.vaccine-type {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: #333333;
+.log-icon {
+  color: var(--primary-blue);
 }
 
-.diet-date,
-.vaccine-date {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-}
-
-.diet-amount,
-.next-due {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-  margin-bottom: 8px;
-}
-
-.diet-notes,
-.vaccine-notes {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #666666;
-  font-style: italic;
-}
-
-/* Loading State */
-.loading {
+.log-details {
+  flex: 1;
   display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.log-value {
+  font-weight: var(--font-weight-medium);
+}
+
+.log-date, .log-due-date {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Button Styles - 恢复原来的不同按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 200px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #666666;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Responsive Design */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  color: var(--neutral-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background: var(--neutral-white);
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--primary-blue);
+  color: var(--neutral-white);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  color: var(--neutral-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-text {
+  background: none;
+  color: var(--primary-blue);
+  padding: var(--space-2);
+}
+
+.btn-text:hover {
+  background-color: var(--neutral-gray-100);
+}
+
+.btn-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .pet-profile {
-    padding: 16px;
-  }
-  
-  .pet-header {
-    flex-direction: column;
-    text-align: center;
-    height: auto;
-    padding: 20px;
-  }
-  
-  .pet-details {
-    text-align: center;
-  }
-  
-  .tab-navigation {
-    flex-wrap: wrap;
-    height: auto;
-  }
-  
-  .tab-button {
-    flex: 1;
-    min-width: 100px;
-  }
-  
-  .overview-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-  
-  .weight-log-item {
+  .pet-header-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    padding-bottom: var(--space-8);
+  }
+
+  .edit-pet-btn {
+    position: static;
+    margin-top: var(--space-4);
+  }
+
+  .tabs-navigation {
+    flex-wrap: wrap;
+  }
+
+  .tab-item {
+    flex: none;
+    width: auto;
+    margin-bottom: var(--space-1);
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .btn {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .overview-grid {
-    grid-template-columns: 1fr;
+  .pet-profile-container {
+    gap: var(--space-4);
   }
-  
+
+  .pet-header-card {
+    padding: var(--space-4);
+  }
+
+  .tab-content {
+    padding: var(--space-4);
+  }
+
   .info-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 }

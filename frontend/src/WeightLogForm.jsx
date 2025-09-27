@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { Weight, Calendar, FileText } from "lucide-react";
 import { API_BASE_URL } from "./config";
 import "./FormStyles.css";
 
-function WeightLogForm({ petId, onLogCreated, onCancel }) {
+function WeightLogForm({ petId, onSuccess }) {
   const [formData, setFormData] = useState({
+    weight: '',
     date: new Date().toISOString().split('T')[0],
-    weight: "",
-    notes: ""
+    notes: ''
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,18 +18,46 @@ function WeightLogForm({ petId, onLogCreated, onCancel }) {
       ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.weight.trim()) {
+      newErrors.weight = 'Weight is required';
+    } else if (isNaN(parseFloat(formData.weight)) || parseFloat(formData.weight) <= 0) {
+      newErrors.weight = 'Weight must be a positive number';
+    }
+    
+    if (!formData.date.trim()) {
+      newErrors.date = 'Date is required';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
+    
+    if (!validateForm()) {
+      return;
+    }
 
+    setLoading(true);
+    
     try {
-      const response = await fetch(`${API_BASE_URL}/weight-logs/`, {
-        method: "POST",
+      const response = await fetch(`${API_BASE_URL}/weight_logs`, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
@@ -37,15 +66,16 @@ function WeightLogForm({ petId, onLogCreated, onCancel }) {
         }),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
-        onLogCreated();
+        onSuccess();
       } else {
-        setError(data.message || "Failed to record weight");
+        const errorData = await response.json();
+        console.error('Error creating weight log:', errorData);
+        alert('Failed to create weight log. Please try again.');
       }
     } catch (error) {
-      setError("Network error, please try again");
+      console.error('Error creating weight log:', error);
+      alert('Failed to create weight log. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -53,64 +83,88 @@ function WeightLogForm({ petId, onLogCreated, onCancel }) {
 
   return (
     <div className="form-container">
-      <h2>Record Weight</h2>
-      {error && <div className="error-message">{error}</div>}
-      
-      <form onSubmit={handleSubmit}>
+      <div className="form-header">
+        <h2 className="form-title">Record Weight</h2>
+        <p className="form-subtitle">Track your pet's weight changes over time</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
-          <label htmlFor="date">Date *</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
+          <label className="form-label" htmlFor="weight">
+            Weight (kg) *
+          </label>
+          <div className="input-group">
+            <Weight size={18} className="input-icon" />
+            <input
+              type="number"
+              id="weight"
+              name="weight"
+              value={formData.weight}
+              onChange={handleChange}
+              className={`form-input ${errors.weight ? 'error' : ''}`}
+              placeholder="Enter weight in kilograms"
+              step="0.1"
+              min="0"
+              required
+            />
+          </div>
+          {errors.weight && <span className="error-message">{errors.weight}</span>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="weight">Weight (kg) *</label>
-          <input
-            type="number"
-            id="weight"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-            step="0.1"
-            min="0"
-            required
-            placeholder="Enter weight"
-          />
+          <label className="form-label" htmlFor="date">
+            Date *
+          </label>
+          <div className="input-group">
+            <Calendar size={18} className="input-icon" />
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              className={`form-input ${errors.date ? 'error' : ''}`}
+              required
+            />
+          </div>
+          {errors.date && <span className="error-message">{errors.date}</span>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="notes">Notes</label>
-          <textarea
-            id="notes"
-            name="notes"
-            value={formData.notes}
-            onChange={handleChange}
-            placeholder="Other information to record"
-            rows="3"
-          />
+          <label className="form-label" htmlFor="notes">
+            Notes
+          </label>
+          <div className="input-group">
+            <FileText size={18} className="input-icon" />
+            <textarea
+              id="notes"
+              name="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              className="form-textarea"
+              placeholder="Any additional notes about this weight record..."
+              rows={3}
+            />
+          </div>
         </div>
 
         <div className="form-actions">
           <button
-            type="button"
-            onClick={onCancel}
-            className="btn-secondary"
-            disabled={loading}
-          >
-            Cancel
-          </button>
-          <button
             type="submit"
-            className="btn-primary"
+            className="btn btn-primary"
             disabled={loading}
           >
-            {loading ? "Recording..." : "Record Weight"}
+            {loading ? (
+              <>
+                <div className="loading-spinner-small"></div>
+                Recording...
+              </>
+            ) : (
+              <>
+                <Weight size={16} />
+                Record Weight
+              </>
+            )}
           </button>
         </div>
       </form>
@@ -118,4 +172,4 @@ function WeightLogForm({ petId, onLogCreated, onCancel }) {
   );
 }
 
-export default WeightLogForm; 
+export default WeightLogForm;

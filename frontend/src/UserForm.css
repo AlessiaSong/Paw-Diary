@@ -1,7 +1,7 @@
-/* Pet Form Styles - Modern Form Design */
+/* User Form Styles - Matching Add Pet Modal Style */
 
-.pet-form {
-  padding: var(--space-6);
+.user-form {
+  padding: var(--space-8);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -15,7 +15,7 @@
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--neutral-gray-800);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
   background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -23,7 +23,7 @@
 }
 
 .form-subtitle {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-lg);
   color: var(--neutral-gray-600);
   line-height: 1.6;
 }
@@ -47,7 +47,7 @@
 }
 
 .form-label {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: var(--neutral-gray-700);
   display: flex;
@@ -76,19 +76,17 @@
 
 .input-icon {
   position: absolute;
-  left: var(--space-3);
+  left: var(--space-4);
   color: var(--neutral-gray-400);
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.form-input,
-.form-select,
-.form-textarea {
+.form-input {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
-  padding-left: var(--space-10);
+  padding: var(--space-4) var(--space-5);
+  padding-left: var(--space-12);
   border: 2px solid var(--neutral-gray-200);
   border-radius: var(--radius-lg);
   font-family: var(--font-family-primary);
@@ -96,111 +94,48 @@
   background-color: var(--neutral-white);
   transition: all var(--transition-fast);
   outline: none;
-  height: 48px; /* 固定高度确保图标垂直居中 */
+  height: 48px;
   display: flex;
   align-items: center;
 }
 
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
+.form-input:focus {
   border-color: var(--primary-blue);
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
-.form-input.error,
-.form-select.error,
-.form-textarea.error {
+.form-input.error {
   border-color: var(--accent-red);
   box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
 }
 
-.form-input::placeholder,
-.form-textarea::placeholder {
+.form-input::placeholder {
   color: var(--neutral-gray-400);
   line-height: 1.5;
 }
 
-.form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right var(--space-4) center;
-  background-repeat: no-repeat;
-  background-size: 16px;
-  padding-right: var(--space-8);
-}
-
-.form-textarea {
-  min-height: 100px;
-  resize: vertical;
-  padding-top: var(--space-3);
-  height: auto; /* 文本域不固定高度 */
-}
-
-/* File Upload */
-.file-upload {
-  position: relative;
-}
-
-.file-input {
+.password-toggle {
   position: absolute;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.file-upload-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-8);
-  border: 2px dashed var(--neutral-gray-300);
-  border-radius: var(--radius-xl);
-  background: var(--neutral-gray-50);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  text-align: center;
-  min-height: 120px;
-}
-
-.file-upload-label:hover {
-  border-color: var(--primary-blue);
-  background: var(--primary-blue-light);
-  transform: translateY(-2px);
-}
-
-.upload-icon {
-  margin-bottom: var(--space-3);
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
   color: var(--neutral-gray-400);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
   transition: color var(--transition-fast);
+  z-index: 2;
 }
 
-.file-upload-label:hover .upload-icon {
-  color: var(--primary-blue);
-}
-
-.upload-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.upload-title {
-  font-weight: var(--font-weight-medium);
+.password-toggle:hover {
   color: var(--neutral-gray-600);
-  font-size: var(--font-size-base);
-}
-
-.upload-hint {
-  font-size: var(--font-size-xs);
-  color: var(--neutral-gray-500);
 }
 
 /* Error Messages */
 .error-message {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--accent-red);
   font-weight: var(--font-weight-medium);
   margin-top: var(--space-1);
@@ -209,8 +144,7 @@
 /* Form Actions */
 .form-actions {
   display: flex;
-  gap: var(--space-4);
-  justify-content: center; /* 按钮居中 */
+  justify-content: center;
   margin-top: var(--space-6);
   padding-top: var(--space-6);
   border-top: 1px solid var(--neutral-gray-200);
@@ -221,11 +155,11 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
+  padding: var(--space-4) var(--space-8);
   border: none;
   border-radius: var(--radius-lg);
   font-family: var(--font-family-primary);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-base);
   text-decoration: none;
   cursor: pointer;
@@ -234,6 +168,7 @@
   user-select: none;
   position: relative;
   overflow: hidden;
+  min-width: 200px;
 }
 
 .btn:disabled {
@@ -258,20 +193,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-.btn-secondary {
-  background: var(--neutral-white);
-  color: var(--neutral-gray-700);
-  border: 2px solid var(--neutral-gray-300);
-  box-shadow: var(--shadow-xs);
-}
-
-.btn-secondary:hover:not(:disabled) {
-  background: var(--neutral-gray-50);
-  border-color: var(--neutral-gray-400);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
 /* Loading Spinner */
 .loading-spinner-small {
   width: 16px;
@@ -289,8 +210,8 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .pet-form {
-    padding: var(--space-4);
+  .user-form {
+    padding: var(--space-6);
   }
   
   .form-row {
@@ -298,22 +219,18 @@
     gap: var(--space-3);
   }
   
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
   .form-title {
     font-size: var(--font-size-2xl);
+  }
+  
+  .form-subtitle {
+    font-size: var(--font-size-base);
   }
 }
 
 @media (max-width: 480px) {
-  .pet-form {
-    padding: var(--space-3);
+  .user-form {
+    padding: var(--space-4);
   }
   
   .form-header {
@@ -328,42 +245,21 @@
     font-size: var(--font-size-sm);
   }
   
-  .file-upload-label {
-    padding: var(--space-6);
-    min-height: 100px;
-  }
-  
-  .upload-title {
-    font-size: var(--font-size-sm);
-  }
-  
-  .upload-hint {
-    font-size: 10px;
+  .btn {
+    min-width: auto;
+    width: 100%;
   }
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  .form-input,
-  .form-select,
-  .form-textarea {
+  .form-input {
     background-color: var(--neutral-gray-800);
     border-color: var(--neutral-gray-600);
     color: var(--neutral-white);
   }
   
-  .form-input:focus,
-  .form-select:focus,
-  .form-textarea:focus {
+  .form-input:focus {
     border-color: var(--primary-blue);
-  }
-  
-  .file-upload-label {
-    background: var(--neutral-gray-800);
-    border-color: var(--neutral-gray-600);
-  }
-  
-  .file-upload-label:hover {
-    background: var(--neutral-gray-700);
   }
 }

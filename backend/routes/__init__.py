@@ -8,7 +8,7 @@ This package contains all the route blueprints for different features:
 """
 
 from .users import users_bp
-from .pets import pets_bp
+from .pets_backup import pets_bp
 from .diet_logs import diet_logs_bp
 from .weight_logs import weight_logs_bp
 from .vaccine_logs import vaccine_logs_bp
